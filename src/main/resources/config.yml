@@ -4,6 +4,7 @@ messages:
   player-only: "&7This command can only be used by players"
   no-permission: "&7You do have permission to use this command"
   unknown-command: "&7Unknown arguments, type /town help"
+  invalid-arguments: "&7Unknown arguments, type /town help"
   name-already-taken: "&7Sorry but this tag is already taken: &f%name%"
   leave-current-town: "&7Please leave your current town before using this command"
   town-created: "&7Successfully created town: &f%name%"
