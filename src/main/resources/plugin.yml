@@ -1,0 +1,9 @@
+name: Towns
+version: ${project.version}
+main: com.gb6.towns.Towns
+depend: [WorldGuard]
+authors: [GB6]
+commands:
+  town:
+    description: Default command for the Town plugin.
+    aliases: [t, towns]
