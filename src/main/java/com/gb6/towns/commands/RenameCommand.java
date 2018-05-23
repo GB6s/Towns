@@ -1,8 +1,8 @@
 package com.gb6.towns.commands;
 
 import com.gb6.towns.managers.Command;
-import com.gb6.towns.objects.Message;
 import com.gb6.towns.objects.Resident;
+import com.gb6.towns.utils.Lang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -22,11 +22,11 @@ public class RenameCommand extends Command {
         Resident resident = RESIDENT_MAP.get(player.getUniqueId());
 
         if (resident.getTown() == null) {
-            new Message("no-town");
+            Lang.NO_TOWN.send(sender);
             return;
         }
 
         resident.getTown().setName(args[0]);
-        new Message("name-set").format("name", args[0]).send(player);
+        Lang.SUCCESS_NAME_SET.format("name", args[0]).send(player);
     }
 }

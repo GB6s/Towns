@@ -1,8 +1,8 @@
 package com.gb6.towns.commands;
 
 import com.gb6.towns.managers.Command;
-import com.gb6.towns.objects.Message;
 import com.gb6.towns.objects.Resident;
+import com.gb6.towns.utils.Lang;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,16 +22,18 @@ public class InviteCommand extends Command {
         Player target = Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            new Message("invalid-player").format("player", args[0]).send(player);
+            Lang.INVALID_PLAYER.format("player", args[0]).send(player);
             return;
         }
 
         Resident resident = RESIDENT_MAP.get(player.getUniqueId());
 
         if (!resident.getTown().inviteResident(target)) {
-            new Message("invite-already").format("player", target.getName()).send(player);
+            Lang.INVITE_ALREADY_SENT.format("player", target.getName()).send(player);
+            return;
         }
 
-        new Message("invite-target").format("name", resident.getTown().getName()).send(target);
+        Lang.INVITE_TARGET.format("name", resident.getTown().getName()).send(target);
+        Lang.INVITE_SENDER.format("name", target.getName()).send(player);
     }
 }

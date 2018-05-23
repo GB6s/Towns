@@ -2,7 +2,7 @@ package com.gb6.towns.managers;
 
 import com.gb6.towns.enums.Perm;
 import com.gb6.towns.enums.Requirement;
-import com.gb6.towns.objects.Message;
+import com.gb6.towns.utils.Lang;
 import lombok.Getter;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -28,27 +28,27 @@ public abstract class Command {
         Boolean isConsole = sender instanceof ConsoleCommandSender;
 
         if (!isConsole && requirement == CONSOLE) {
-            new Message("console-only").send(sender);
+            Lang.ONLY_CONSOLE.send(sender);
             return;
         }
 
         if (!isPlayer && requirement == PLAYER) {
-            new Message("player-only").send(sender);
+            Lang.ONLY_PLAYER.send(sender);
             return;
         }
 
         if (!sender.isOp() && permission.has(sender)) {
-            new Message("no-permission").send(sender);
+            Lang.NO_PERMISSION.send(sender);
             return;
         }
 
         if (requiredArgs == -1 && args.length == 0) {
-            new Message("invalid-arguments").send(sender);
+            Lang.ERROR_UNKNOWN_COMMAND.send(sender);
             return;
         }
 
         if (requiredArgs != -1 && args.length < requiredArgs) {
-            new Message("invalid-arguments").send(sender);
+            Lang.ERROR_UNKNOWN_COMMAND.send(sender);
             return;
         }
 

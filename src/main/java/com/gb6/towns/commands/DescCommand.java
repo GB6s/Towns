@@ -1,8 +1,8 @@
 package com.gb6.towns.commands;
 
 import com.gb6.towns.managers.Command;
-import com.gb6.towns.objects.Message;
 import com.gb6.towns.objects.Resident;
+import com.gb6.towns.utils.Lang;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -19,7 +19,7 @@ public class DescCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            new Message("invalid-arguments").send(sender);
+            Lang.ERROR_UNKNOWN_COMMAND.send(sender);
             return;
         }
 
@@ -28,11 +28,11 @@ public class DescCommand extends Command {
         Resident resident = RESIDENT_MAP.get(player.getUniqueId());
 
         if (TOWN_MAP.get(resident.getTownUuid()) == null || !resident.hasPerm(DESC)) {
-            new Message("no-permission").send(player);
+            Lang.NO_PERMISSION.send(sender);
             return;
         }
 
         TOWN_MAP.get(resident.getTownUuid()).setDescription(String.join(" ", args));
-        new Message("successfully-desc").send(sender);
+        Lang.SUCCESS_DESCRIPTION_SET.send(sender);
     }
 }

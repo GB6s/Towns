@@ -1,11 +1,13 @@
 package com.gb6.towns.managers;
 
 import com.gb6.towns.Towns;
-import com.gb6.towns.objects.Message;
+import com.gb6.towns.utils.Lang;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CommandManager implements CommandExecutor {
 
@@ -18,7 +20,7 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         for (Command cmd : commandList) {
-            List<String> output = new LinkedList<>(Arrays.asList(args));
+            List<String> output = new ArrayList<>(Arrays.asList(args));
 
             if (output.size() > 0) {
                 output.remove(0);
@@ -34,10 +36,10 @@ public class CommandManager implements CommandExecutor {
                 continue;
             }
 
-            cmd.run(sender, (String[]) output.toArray());
+            cmd.run(sender, output.toArray(new String[output.size()]));
             return true;
         }
-        new Message("unknown-command").send(sender);
+        Lang.ERROR_UNKNOWN_COMMAND.send(sender);
         return true;
     }
 
@@ -56,10 +58,6 @@ public class CommandManager implements CommandExecutor {
         return Prison.color(b.toString());
     }
 
-    private void componentize() {
-        for (Map.Entry<String, Command> c : commands.entrySet()) {
-            c.getValue().setComponent(this.command);
-        }
-    }*/
+*/
 
 }
